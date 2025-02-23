@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Samples" %>
+<%= form_with model: @header, url: samples_path, method: "POST" do |form| %>
+  <h1>Samples</h1>
+
+  <% if form.object.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(form.object.errors.count, "error") %> prohibited this sample from being saved:</h2>
+      
+      <ul>
+        <% form.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <p>日付1</p>
+  <%= form.text_field :date1, class: "datepicker", value: form.object.date1.try(:strftime, "%Y/%m/%d") %>
+  <hr/>
+  
+  <p>リスト</p>
+  <div id="reload_frame">
+    <%= render partial: "sample_list", locals: {form: form} %>
+  </div>
+  <%= link_to "New record", "javascript: void(0)", data: { action: "click->samples#record_add"}, id: "record_add" %>
+  <hr/>
+  <%= form.submit "Submit samples" %>
+<% end %>
+

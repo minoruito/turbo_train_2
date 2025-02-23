@@ -1,0 +1,16 @@
+<%= turbo_frame_tag :sample_list do %>
+  <table>
+    <tbody id="table_form">
+    <% @header.details.each_with_index do |detail, index| %>
+      <%= hidden_field_tag "header[details_attributes][#{index}][id]", detail.id %>
+      <%= hidden_field_tag "header[details_attributes][#{index}][_destroy]", false, id: "header_details_attributes_#{index}__destroy" %>
+      <tr data-index="<%= index%>">
+        <td><%= text_field_tag "header[details_attributes][#{index}][title]", detail.title %></td>
+        <td><%= text_field_tag "header[details_attributes][#{index}][date2]", detail.date2.try(:strftime, "%Y/%m/%d"), class: "datepicker" %></td>
+        <td><%= link_to "destroy", "javascript: void(0)", data: {action: "click->samples#record_remove"} %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= hidden_field_tag "header[id]", @header.id %>
+<% end %>

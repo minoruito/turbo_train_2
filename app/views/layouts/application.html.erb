@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>turbo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="turbo-cache-control" content="no-preview">
+  <!--    <meta name="turbo-visit-control" content="reload">-->
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= yield :stylesheet %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+  <%= yield :javascript %>
+</head>
+
+  
+  <body>
+  <div class="container" data-controller="<%=js_controller_name%>"
+       data-<%=js_controller_name %>-controllername-value="<%= js_controller_name %>"
+       data-<%=js_controller_name%>-actionname-value="<%= controller.action_name %>"
+  >
+    <%= yield %>
+  </div>
+  </body>
+
+</html>
